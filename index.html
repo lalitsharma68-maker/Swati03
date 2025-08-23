@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy Birthday, Swati 🎂</title>
+  <meta name="description" content="A minimal, fun one-page birthday card for Swati" />
+  <style>
+    :root{
+      --bg1:#ffe3ec; --bg2:#e6e0ff; --bg3:#dffff3; --ink:#2b2b2b; --accent:#ff5fa2; --accent2:#7c3aed; --card:#ffffffcc; --shadow:0 10px 30px rgba(0,0,0,.12);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--ink);
+      background: radial-gradient(1200px 800px at 10% 10%, var(--bg1), transparent 70%),
+                  radial-gradient(1000px 700px at 90% 0%, var(--bg2), transparent 70%),
+                  radial-gradient(900px 700px at 50% 100%, var(--bg3), transparent 70%),
+                  #fff;
+      overflow-x:hidden;
+    }
+
+    /* Floating balloons */
+    .balloon{position:absolute; bottom:-20vh; width:45px; height:60px; border-radius:50% 50% 45% 45%;
+      background:linear-gradient(180deg, #ffd1dc, #ff8fb7); box-shadow:var(--shadow); opacity:.8;
+      animation: floatUp 14s linear infinite; transform:translateX(-50%);
+    }
+    .balloon:after{content:""; position:absolute; left:50%; bottom:-14px; width:2px; height:35px; background:#e2e2e2}
+    .balloon:nth-child(2){left:15%; animation-duration:16s; background:linear-gradient(180deg,#c7d2fe,#818cf8)}
+    .balloon:nth-child(3){left:30%; animation-duration:18s; background:linear-gradient(180deg,#befae2,#34d399)}
+    .balloon:nth-child(4){left:55%; animation-duration:20s; background:linear-gradient(180deg,#fde68a,#f59e0b)}
+    .balloon:nth-child(5){left:75%; animation-duration:17s; background:linear-gradient(180deg,#fbcfe8,#f472b6)}
+    .balloon:nth-child(6){left:88%; animation-duration:19s; background:linear-gradient(180deg,#bae6fd,#38bdf8)}
+    @keyframes floatUp{0%{transform:translate(-50%,0) rotate(2deg)} 50%{transform:translate(-50%,-50vh) rotate(-2deg)} 100%{transform:translate(-50%,-110vh) rotate(2deg)}}
+
+    /* Hero */
+    .hero{min-height:90svh; display:grid; place-items:center; text-align:center; position:relative; padding:80px 16px 24px}
+    .title{font-size: clamp(36px, 8vw, 72px); line-height:1.05; margin:0; letter-spacing:.5px}
+    .title .grad{background:linear-gradient(90deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent}
+    .subtitle{margin:.6rem 0 0; opacity:.85}
+
+    /* Pulse heart */
+    .heart{display:inline-block; transform-origin:center; animation:pulse 1.5s ease-in-out infinite}
+    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+
+    /* CTA chips */
+    .chips{display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin:18px 0 0}
+    .chip{padding:10px 16px; border-radius:999px; background:#fff; box-shadow:var(--shadow); font-weight:600}
+
+    /* Card gallery */
+    .wrap{max-width:1100px; margin:40px auto; padding:0 16px 80px}
+    .grid{display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:18px}
+    .card{background:var(--card); border-radius:22px; overflow:hidden; box-shadow:var(--shadow); border:1px solid rgba(0,0,0,.04); position:relative}
+    .card img{width:100%; height:320px; object-fit:cover; display:block; filter:saturate(1.05) contrast(1.02)}
+    .card:hover{transform:translateY(-6px) scale(1.01); transition:.25s ease}
+    .tag{position:absolute; inset:auto 10px 10px auto; background:#fff; padding:6px 10px; border-radius:999px; font-size:12px; box-shadow:var(--shadow)}
+
+    /* Lightbox */
+    .overlay{position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.6); backdrop-filter: blur(2px);}
+    .overlay.open{display:grid}
+    .overlay img{max-width:90vw; max-height:80vh; border-radius:16px; box-shadow:var(--shadow)}
+
+    /* Footer */
+    footer{padding:36px 16px 80px; text-align:center; opacity:.8}
+
+    /* Confetti Canvas */
+    canvas#confetti{position:fixed; inset:0; pointer-events:none}
+
+    /* Floating emojis */
+    .float-emoji{position:absolute; font-size:28px; animation: drift 10s linear infinite; opacity:.9}
+    @keyframes drift{0%{transform:translateY(0) rotate(0)} 100%{transform:translateY(-120vh) rotate(360deg)}}
+
+    /* Tiny typewriter for caption */
+    .type{display:inline-block; border-right:2px solid currentColor; white-space:nowrap; overflow:hidden; animation: typing 3s steps(30,end), blink .9s step-end infinite alternate}
+    @keyframes typing{from{width:0} to{width:100%}} @keyframes blink{50%{border-color:transparent}}
+  </style>
+</head>
+<body>
+  <!-- Floating balloons (background) -->
+  <div class="balloon" style="left:8%"></div>
+  <div class="balloon"></div>
+  <div class="balloon"></div>
+  <div class="balloon"></div>
+  <div class="balloon"></div>
+  <div class="balloon"></div>
+
+  <!-- Confetti -->
+  <canvas id="confetti"></canvas>
+
+  <section class="hero" aria-label="Hero">
+    <div>
+      <h1 class="title">Happy Birthday, <span class="grad">Swati</span> <span class="heart">🎉</span></h1>
+      <p class="subtitle"><span class="type">Wishing you lots of happiness ✨</span></p>
+      <div class="chips">
+        <span class="chip">Stay awesome ✨</span>
+        <span class="chip">Shine bright 🌟</span>
+        <span class="chip">Have fun 🎈</span>
+      </div>
+    </div>
+  </section>
+
+  <main class="wrap" aria-label="Gallery">
+    <div class="grid" id="gallery">
+      <!-- Replace src paths with her real photos (recommended size ≥ 1200px wide) -->
+      <figure class="card"><img src="images/swati1.jpg" alt="Swati photo 1"><figcaption class="tag">01</figcaption></figure>
+      <figure class="card"><img src="images/swati2.jpg" alt="Swati photo 2"><figcaption class="tag">02</figcaption></figure>
+      <figure class="card"><img src="images/swati3.jpg" alt="Swati photo 3"><figcaption class="tag">03</figcaption></figure>
+      <figure class="card"><img src="images/swati4.jpg" alt="Swati photo 4"><figcaption class="tag">04</figcaption></figure>
+      <figure class="card"><img src="images/swati5.jpg" alt="Swati photo 5"><figcaption class="tag">05</figcaption></figure>
+      <figure class="card"><img src="images/swati6.jpg" alt="Swati photo 6"><figcaption class="tag">06</figcaption></figure>
+    </div>
+  </main>
+
+  <footer>Made with care — from Lalit</footer>
+
+  <!-- Lightbox overlay -->
+  <div class="overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <img id="lightbox-img" src="" alt="Preview" />
+  </div>
+
+  <!-- Floating emojis (fun sprinkles) -->
+  <div class="float-emoji" style="left:5%; bottom:-10vh; animation-duration:12s">✨</div>
+  <div class="float-emoji" style="left:20%; bottom:-14vh; animation-duration:10s">🎈</div>
+  <div class="float-emoji" style="left:40%; bottom:-18vh; animation-duration:11s">🌸</div>
+  <div class="float-emoji" style="left:60%; bottom:-16vh; animation-duration:13s">⭐</div>
+  <div class="float-emoji" style="left:80%; bottom:-12vh; animation-duration:9s">💫</div>
+
+  <script>
+    // Simple confetti
+    (function(){
+      const c = document.getElementById('confetti');
+      const ctx = c.getContext('2d');
+      let W, H, pieces = [];
+      function resize(){ W = c.width = innerWidth; H = c.height = innerHeight; }
+      addEventListener('resize', resize); resize();
+      function makePiece(){
+        return { x: Math.random()*W, y: -20, size: 6+Math.random()*6, rot: Math.random()*360,
+                 velY: 1+Math.random()*3, velX: -1+Math.random()*2, hue: Math.random()*360 };
+      }
+      for(let i=0;i<140;i++) pieces.push(makePiece());
+      function draw(){
+        ctx.clearRect(0,0,W,H);
+        pieces.forEach(p=>{
+          p.x += p.velX; p.y += p.velY; p.rot += p.velY*2;
+          if(p.y>H+30) { p.x=Math.random()*W; p.y=-20 }
+          ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot*Math.PI/180);
+          ctx.fillStyle = `hsl(${p.hue},95%,60%)`;
+          ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*0.6);
+          ctx.restore();
+        });
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    // Lightbox logic
+    const gallery = document.getElementById('gallery');
+    const box = document.getElementById('lightbox');
+    const boxImg = document.getElementById('lightbox-img');
+    gallery.addEventListener('click', e=>{
+      const img = e.target.closest('img');
+      if(!img) return;
+      boxImg.src = img.src; box.classList.add('open');
+    });
+    box.addEventListener('click', ()=> box.classList.remove('open'));
+
+    // Reduce motion preference
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      document.querySelectorAll('.balloon,.float-emoji').forEach(el=> el.style.animation = 'none');
+      const canvas = document.getElementById('confetti');
+      if(canvas) canvas.remove();
+    }
+  </script>
+</body>
+</html>
